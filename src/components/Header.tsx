@@ -1,6 +1,8 @@
+import React from "react";
+
 export default function Header({
  children
-}) {
+}: {children: React.ReactNode}) {
   return (
     <header className="header">
       {children}
@@ -8,6 +10,6 @@ export default function Header({
   );
 }
 
-export function HeaderTop({ children }) {
+export function HeaderTop({ children }: {children: React.ReactNode}) {
   return <div className="header__top">{children}</div>
 }

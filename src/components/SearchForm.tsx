@@ -1,9 +1,14 @@
+type SearchFormProps = {
+  searchText: string
+  setSearchText: (searchText: string) => void
+}
+
 
 
 export default function SearchForm({
   searchText,
   setSearchText
-}) {
+}: SearchFormProps) {
 
   return (
     <form onSubmit={e => {
@@ -17,7 +22,6 @@ export default function SearchForm({
       value={searchText}
       onChange={e => {
         setSearchText(e.target.value)
-        fetch()
       }}
         spellCheck="false"
         type="text"
