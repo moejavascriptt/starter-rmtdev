@@ -22,9 +22,9 @@ export function useJobItems(searchText: string) {
         fetchData()
       }, [searchText])
 
-      return {
+      return [
         jobItemsSliced,
         isLoading
-      }
+      ]
     
 }
