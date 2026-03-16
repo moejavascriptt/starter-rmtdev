@@ -13,7 +13,7 @@ export function JobList({
   return <ul className="job-list">
     {isLoading && < Spinner />}
     {
-      !isLoading && jobItems.map(jobItem => <JobListItem jobItem={jobItem}/>)
+      !isLoading && jobItems.map(jobItem => <JobListItem key={jobItem.id} jobItem={jobItem}/>)
     }
   </ul>;
 }
