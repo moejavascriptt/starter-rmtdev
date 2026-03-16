@@ -1,11 +1,13 @@
 import JobListItem from "./JobListItem";
+import Spinner from "./Spinner";
 
 export function JobList({
-  jobItems
+  jobItems, isLoading
 }) {
   return <ul className="job-list">
+    {isLoading && < Spinner />}
     {
-      jobItems.map(jobItem => <JobListItem jobItem={jobItem}/>)
+      !isLoading && jobItems.map(jobItem => <JobListItem jobItem={jobItem}/>)
     }
   </ul>;
 }
