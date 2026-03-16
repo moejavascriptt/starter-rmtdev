@@ -16,8 +16,27 @@ import { useJobItems } from "../lib/hooks";
 
 function App() {
 
-const [searchText, setSearchText] = useState("")
+const [searchText, setSearchText] = useState<string>("")
 const [jobItems, isLoading ] = useJobItems(searchText)
+const [activeId, setActiveId] = useState<number | null>(null)
+
+
+useEffect(() => {
+
+  const handleHashChange = () => {
+  const id = +window.location.hash.slice(1)
+    //unary operator + sign , convert id to a number.
+  setActiveId(id)
+
+  }
+
+
+  window.addEventListener('hashchange', handleHashChange)
+
+return () => {
+  window.removeEventListener('hashchange', handleHashChange )
+}
+}, [])
 
   return (
   <>
