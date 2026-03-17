@@ -12,31 +12,13 @@ import ResultsCount from "./ResultsCount";
 import SortingControls from "./SortingControls";
 import JobList from "./JobList";
 import PaginationControls from "./PaginationControls";
-import { useJobItems } from "../lib/hooks";
+import { useActiveId, useJobItems } from "../lib/hooks";
 
 function App() {
 
 const [searchText, setSearchText] = useState<string>("")
 const [jobItems, isLoading ] = useJobItems(searchText)
-const [activeId, setActiveId] = useState<number | null>(null)
-
-
-useEffect(() => {
-
-  const handleHashChange = () => {
-  const id = +window.location.hash.slice(1)
-    //unary operator + sign , convert id to a number.
-  setActiveId(id)
-
-  }
-
-
-  window.addEventListener('hashchange', handleHashChange)
-
-return () => {
-  window.removeEventListener('hashchange', handleHashChange )
-}
-}, [])
+const activeId = useActiveId()
 
   return (
   <>
