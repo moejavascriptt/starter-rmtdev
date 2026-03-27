@@ -12,13 +12,31 @@ import ResultsCount from "./ResultsCount";
 import SortingControls from "./SortingControls";
 import JobList from "./JobList";
 import PaginationControls from "./PaginationControls";
-import { useActiveId, useJobItems } from "../lib/hooks";
+import { useActiveId, useJobItem, useJobItems } from "../lib/hooks";
+import { BASE_API_URL } from "../lib/constants";
 
 function App() {
 
 const [searchText, setSearchText] = useState<string>("")
 const [jobItems, isLoading ] = useJobItems(searchText)
 const activeId = useActiveId()
+const jobItem = useJobItem(activeId)
+
+
+useEffect(() => {
+
+  if (!activeId) return
+
+  const fetchData = async  () => {
+    const response = await fetch(`${BASE_API_URL}/${activeId}`)
+    const data =  await response.json()
+    setJobItem(data.jobItem)
+  }
+
+  fetchData()
+
+
+}, [activeId])
 
   return (
   <>
