@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { JobItem } from "./types"
+import { JobItem, JobItemExpanded } from "./types"
 import { BASE_API_URL } from "./constants"
 
 
@@ -29,19 +29,24 @@ export function useActiveId() {
 
 
 export function useJobItem(id: number | null) {
-  const [jobItem, setJobItem] = useState(null)
+  const [jobItem, setJobItem] = useState<JobItemExpanded | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(`${BASE_API_URL}/${id}`)
       const data = await response.json()
+      setIsLoading(false)
       setJobItem(data.jobItem)
     }
 
    fetchData() 
   }, [id])
 
-  return jobItem
+  return [
+    jobItem, 
+    isLoading 
+  ] as const
 }
 
 
