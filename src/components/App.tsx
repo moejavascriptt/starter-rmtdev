@@ -18,7 +18,7 @@ import { BASE_API_URL } from "../lib/constants";
 function App() {
 
 const [searchText, setSearchText] = useState<string>("")
-const [jobItems, isLoading ] = useJobItems(searchText)
+const [jobItems, isLoading, totalNumberOfResults ] = useJobItems(searchText)
 const activeId = useActiveId()
 const jobItem = useJobItem(activeId)
 
@@ -55,7 +55,7 @@ useEffect(() => {
   <Container>
     <Sidebar>
       <SidebarTop>
-            <ResultsCount /> 
+            <ResultsCount totalNumberOfResults={totalNumberOfResults} /> 
             <SortingControls />
       </SidebarTop>
         
